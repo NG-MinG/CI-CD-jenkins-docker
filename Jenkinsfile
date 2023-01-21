@@ -17,8 +17,7 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                sh 'docker build -t 20127050/onlineacademy:latest .'
-                sh 'docker tag onlineacademy 20127050/onlineacademy:latest'
+                sh 'docker build -t 20127050/onlineacademy .'
             }
         }
         stage('Docker push') {
