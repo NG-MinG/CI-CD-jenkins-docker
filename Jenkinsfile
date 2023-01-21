@@ -26,7 +26,7 @@ pipeline {
         stage('Docker push') {
             steps {
                 sh 'docker tag onlineacademy:latest 20127050/onlineacademy:latest'
-                sh 'echo $dockerhub_PSW | docker login --u $dockerhub_USR --password-stdin'
+                sh 'echo $dockerhub_PSW | docker login -u $dockerhub_USR --password-stdin'
                 
                 sh 'docker push 20127050/onlineacademy:latest'
             }
