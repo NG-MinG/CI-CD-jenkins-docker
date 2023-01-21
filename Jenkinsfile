@@ -3,6 +3,9 @@ pipeline {
     tools {
         nodejs "nodejs"
     }
+    environment {
+        dockerhub = credentials('c3244f57-9392-4987-a76f-00b9533c5c0a')
+    }
     stages {
         stage('Checkout') {
             steps {
@@ -17,14 +20,15 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                sh 'docker build -t 20127050/onlineacademy .'
+                sh 'docker build -t onlineacademy:latest .'
             }
         }
         stage('Docker push') {
             steps {
-                withDockerRegistry([credentialsId: "dockerHub", url: ""]) {
-                    sh 'docker push 20127050/onlineacademy:latest'
-                }
+                sh 'docker tag onlineacademy:latest 20127050/onlineacademy:latest'
+                sh 'echo $dockerhub_PSW | docker login --u $dockerhub_USR --password-stdin'
+                
+                sh 'docker push 20127050/onlineacademy:latest'
             }
         }
         stage('Docker deploy') {
