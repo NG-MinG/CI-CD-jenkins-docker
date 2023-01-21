@@ -33,7 +33,7 @@ pipeline {
         }
         stage('Docker deploy') {
             steps {
-                sh 'ssh -i /home/keys/192.168.64.130/id_rsa -o StrictHostKeyChecking=no user-20127540@192.168.64.130 docker run -d -p 8003:5000 20127050/onlineacademy'
+                sh 'ssh -i /home/keys/192.168.64.130/id_rsa -o StrictHostKeyChecking=no user-20127540@192.168.64.130 docker run -d -p 5000:8080 20127050/onlineacademy'
             }
         }
     }
